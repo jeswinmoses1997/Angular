@@ -33,14 +33,14 @@ export class HomeComponent implements OnInit, OnDestroy {
     });
 
     this.firstObsSubscription = customIntervalObservable
-      .pipe(
-        filter((data) => {
-          return data > 0;
-        }),
-        map((data: number) => {
-          return 'Round:' + data + 1;
-        })
-      )
+      .pipe
+      // filter((data) => {
+      //   return data > 0;
+      // }),
+      // map((data: number) => {
+      //   return 'Round:' + data + 1;
+      // })
+      ()
       .subscribe(
         (data) => {
           // console.log('Round:' + (data + 1));
