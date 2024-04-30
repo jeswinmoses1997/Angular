@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-root',
@@ -11,6 +11,12 @@ export class AppComponent implements OnInit {
   genders = ['male', 'female'];
   signupForm: FormGroup;
   forbiddenUsernames = ['Chris', 'Anna'];
+
+  get hobbyControls() {
+    return (this.signupForm.get('hobbies') as FormArray).controls;
+  }
+
+  constructor() {}
 
   ngOnInit() {
     this.signupForm = new FormGroup({
@@ -28,22 +34,21 @@ export class AppComponent implements OnInit {
       gender: new FormControl('male'),
       hobbies: new FormArray([]),
     });
-    // this.signupForm.valueChanges.subscribe((value) => console.log(value));
+    // this.signupForm.valueChanges.subscribe(
+    //   (value) => console.log(value)
+    // );
     this.signupForm.statusChanges.subscribe((status) => console.log(status));
-
     this.signupForm.setValue({
       userData: {
-        userName: 'Max',
+        username: 'Max',
         email: 'max@test.com',
       },
       gender: 'male',
       hobbies: [],
     });
-
     this.signupForm.patchValue({
       userData: {
-        userName: 'Anna',
-        email: 'max@test.com',
+        username: 'Anna',
       },
     });
   }
@@ -53,29 +58,25 @@ export class AppComponent implements OnInit {
     this.signupForm.reset();
   }
 
-  getControls() {
-    return (<FormArray>this.signupForm.get('hobbies')).controls;
-  }
-
   onAddHobby() {
     const control = new FormControl(null, Validators.required);
     (<FormArray>this.signupForm.get('hobbies')).push(control);
   }
 
-  // {nameIsForbidden:true}
   forbiddenNames(control: FormControl): { [s: string]: boolean } {
     if (this.forbiddenUsernames.indexOf(control.value) !== -1) {
       return { nameIsForbidden: true };
     }
     return null;
   }
+
   forbiddenEmails(control: FormControl): Promise<any> | Observable<any> {
     const promise = new Promise<any>((resolve, reject) => {
       setTimeout(() => {
-        if (control.value == 'test@test.com') {
-          resolve { emailIsForbidden: true };
+        if (control.value === 'test@test.com') {
+          resolve({ emailIsForbidden: true });
         } else {
-          resolve null;
+          resolve(null);
         }
       }, 1500);
     });
