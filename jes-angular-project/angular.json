@@ -16,9 +16,12 @@
             "outputPath": "dist/first-app",
             "index": "src/index.html",
             "main": "src/main.ts",
-            "polyfills": "zone.js",
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
-            "assets": ["src/favicon.ico", "src/assets"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
@@ -80,11 +83,16 @@
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
-            "polyfills": "zone.js",
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.spec.json",
             "karmaConfig": "karma.conf.js",
-            "assets": ["src/favicon.ico", "src/assets"],
-            "styles": ["src/styles.css"],
+            "assets": [
+              "src/favicon.ico",
+              "src/assets"
+            ],
+            "styles": [
+              "src/styles.css"
+            ],
             "scripts": []
           }
         }
@@ -92,6 +100,6 @@
     }
   },
   "cli": {
-    "analytics": "9d41dfd3-c176-4151-816c-12440a561027"
+    "analytics": "73ea0771-d27a-4a86-a7b7-59268cea6c4d"
   }
 }
