@@ -14,7 +14,12 @@ export class RecipeEditComponent implements OnInit {
   editMode = false;
   recipeForm: FormGroup;
 
-  get recipeControls() {
+  get controls() {
+    // a getter!
+    return (<FormArray>this.recipeForm.get('ingredients')).controls;
+  }
+
+  get ingredientsControls() {
     return (this.recipeForm.get('ingredients') as FormArray).controls;
   }
 
@@ -98,10 +103,5 @@ export class RecipeEditComponent implements OnInit {
       description: new FormControl(recipeDescription, Validators.required),
       ingredients: recipeIngredients,
     });
-  }
-
-  get controls() {
-    // a getter!
-    return (<FormArray>this.recipeForm.get('ingredients')).controls;
   }
 }

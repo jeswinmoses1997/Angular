@@ -8,7 +8,7 @@ import { LoggingService } from '../logging.service';
 @Component({
   selector: 'app-shopping-list',
   templateUrl: './shopping-list.component.html',
-  styleUrls: ['./shopping-list.component.css'],
+  styleUrls: ['./shopping-list.component.css']
 })
 export class ShoppingListComponent implements OnInit, OnDestroy {
   ingredients: Ingredient[];
@@ -27,7 +27,7 @@ export class ShoppingListComponent implements OnInit, OnDestroy {
       }
     );
 
-    this.loggingService.printLog('Hello from ShoppingListComponent ngOnInit');
+    this.loggingService.printLog('Hello from ShoppingListComponent ngOnInit!');
   }
 
   onEditItem(index: number) {

@@ -1,13 +1,5 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
-
-// const appRoutes: Routes = [
-//   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
-//   {
-//     path: 'recipes',
-//     loadChildren: './recipes/recipes.module.ts#RecipesModule',
-//   },
-// ];
+import { Routes, RouterModule } from '@angular/router';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/recipes', pathMatch: 'full' },
@@ -30,9 +22,7 @@ const appRoutes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forRoot(appRoutes, { preloadingStrategy: PreloadAllModules }),
-  ],
+  imports: [RouterModule.forRoot(appRoutes)],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}
