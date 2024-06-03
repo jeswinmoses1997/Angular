@@ -3,9 +3,9 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { catchError, tap } from 'rxjs/operators';
 import { throwError, BehaviorSubject } from 'rxjs';
-import { environment } from '../../environments/environment';
 
 import { User } from './user.model';
+import { environment } from '../../environments/environment.development';
 
 export interface AuthResponseData {
   kind: string;
