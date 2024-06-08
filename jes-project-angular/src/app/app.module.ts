@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, isDevMode } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -24,13 +24,11 @@ import * as fromAuth from './auth/store/auth.reducer';
     HttpClientModule,
     AppRoutingModule,
     StoreModule.forRoot({auth: fromAuth.authReducer}),
-    EffectsModule.forRoot([AuthEffects, RecipeEffects, ]),
+    EffectsModule.forRoot([AuthEffects, RecipeEffects]),
     StoreDevtoolsModule.instrument({ logOnly: environment.production }),
     StoreRouterConnectingModule.forRoot(),
     SharedModule,
-    CoreModule,
-    StoreModule.forRoot({}, {}),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    CoreModule
   ],
   bootstrap: [AppComponent]
   // providers: [LoggingService]
