@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/angular-pwa",
+            "outputPath": "dist/angular-pwa/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -25,7 +25,9 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "serviceWorker": true,
+            "ngswConfigPath": "ngsw-config.json"
           },
           "configurations": {
             "production": {
@@ -92,6 +94,64 @@
               "**/node_modules/**"
             ]
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/angular-pwa/server",
+            "main": "server.ts",
+            "tsConfig": "src/tsconfig.server.json"
+          },
+          "configurations": {
+            "production": {
+              "buildOptimizer": true,
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "sourceMap": false,
+              "extractLicenses": true,
+              "vendorChunk": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@angular-devkit/build-angular:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "angular-pwa:build:development",
+              "serverTarget": "angular-pwa:server:development"
+            },
+            "production": {
+              "browserTarget": "angular-pwa:build:production",
+              "serverTarget": "angular-pwa:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@angular-devkit/build-angular:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "angular-pwa:build:production",
+              "serverTarget": "angular-pwa:server:production"
+            },
+            "development": {
+              "browserTarget": "angular-pwa:build:development",
+              "serverTarget": "angular-pwa:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     },
@@ -118,5 +178,8 @@
       }
     }
   },
-  "defaultProject": "angular-pwa"
+  "defaultProject": "angular-pwa",
+  "cli": {
+    "analytics": "14041959-6170-49ad-a761-044ff6f62491"
+  }
 }
